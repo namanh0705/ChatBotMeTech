@@ -83,8 +83,8 @@ responses:
       {fullname} thành {changename}, đúng không ạ?
   utter_ask_confirm2:
   - text: Trường hợp này Hãng sẽ hỗ trợ Đại Lý sửa tên khách duy nhất một lần không
-      tính phí, sau khi thay đổi sẽ không khôi phục lại được tên ban đầu. Anh
-      có đồng ý không ạ?
+      tính phí, sau khi thay đổi sẽ không khôi phục lại được tên ban đầu. Anh có đồng
+      ý không ạ?
   utter_ask_confirm3:
   - text: Dạ, vâng. Trường hợp này em sẽ gửi đến bộ phận liên quan hoàn thành thao
       tác sửa tên cho mình. Sau khi thao tác thành công, em sẽ gửi Email xác nhận
