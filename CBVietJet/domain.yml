@@ -1,0 +1,102 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- affirm
+- deny
+- request
+- name_customer
+- fullname
+- id_ticket
+- travel
+- id_agency
+- changename
+- ans_changname
+entities:
+- name
+- fullname
+- id_ticket
+- travel
+- idticket
+slots:
+  changename:
+    type: unfeaturized
+    auto_fill: false
+  confirm:
+    type: unfeaturized
+    auto_fill: false
+  confirm2:
+    type: unfeaturized
+    auto_fill: false
+  confirm3:
+    type: unfeaturized
+    auto_fill: false
+  confirm4:
+    type: unfeaturized
+    auto_fill: false
+  freeeditname:
+    type: unfeaturized
+    auto_fill: false
+  fullname:
+    type: unfeaturized
+    auto_fill: false
+  id_agency:
+    type: unfeaturized
+    auto_fill: false
+  id_ticket:
+    type: unfeaturized
+    auto_fill: false
+  name:
+    type: unfeaturized
+    auto_fill: false
+  question:
+    type: unfeaturized
+    auto_fill: false
+  requested_slot:
+    type: unfeaturized
+  travel:
+    type: unfeaturized
+    auto_fill: false
+responses:
+  utter_ask_name:
+  - text: Anh vui lòng cho em biết tên mình để tiện việc xưng hô ạ!
+  utter_ask_id_ticket:
+  - text: Dạ vâng, em chào anh {name}. Anh {name} vui lòng cung cấp giúp em mã số
+      đặt chỗ?
+  utter_ask_fullname:
+  - text: Họ và tên đầy đủ trên vé là gì ạ?
+  utter_ask_id_agency:
+  - text: Mã đại lý là gì ạ?
+  utter_ask_travel:
+  - text: Hành trình bay là gì ạ
+  utter_ask_question:
+  - text: Dạ vâng, em có thể hỗ trợ cho anh thông tin gì trên mã vé này ạ?
+  utter_ask_changename:
+  - text: Anh muốn đổi như thế nào ạ?
+  utter_ask_freeeditname:
+  - text: Dạ vâng. Em cảm ơn anh {name} Hiện tại tên sai của mình sẽ được Hãng hỗ
+      trợ miễn phí.
+  utter_ask_confirm:
+  - text: Vậy em xin xác nhận thông tin như sau. Mã đặt chỗ {id_ticket} – Hành khách
+      tên {fullname} – Hành trình bay {travel}. Anh {name} yêu cầu sửa tên hành khách
+      {fullname} thành {changename}, đúng không ạ?
+  utter_ask_confirm2:
+  - text: Trường hợp này Hãng sẽ hỗ trợ Đại Lý sửa tên khách duy nhất một lần không
+      tính phí, sau khi thay đổi sẽ không khôi phục lại được tên ban đầu. Anh
+      có đồng ý không ạ?
+  utter_ask_confirm3:
+  - text: Dạ, vâng. Trường hợp này em sẽ gửi đến bộ phận liên quan hoàn thành thao
+      tác sửa tên cho mình. Sau khi thao tác thành công, em sẽ gửi Email xác nhận
+      về cho anh. Anh vui lòng kiểm tra Email sau giúp em.
+  utter_ask_confirm4:
+  - text: Mình còn cần em hỗ trợ thông tin nào khác nữa không ạ?
+  utter_default:
+  - text: Xin lỗi vui lòng cung cấp thông tin chính xác
+actions:
+- action_chat_restart
+forms:
+- resquest_form
+- id_ticket_form
+- question_form
+- confirm_form
