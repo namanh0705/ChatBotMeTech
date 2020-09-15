@@ -1,11 +1,12 @@
 ## intent:greet
-- hey
+- xin chào
 - hello
+- chào
 - hi
-- good morning
-- good evening
-- hey there
-
+- ad ơi
+- anh chào em
+- mình muốn trợ giúp
+- hướng dẫn tôi với
 ## intent:request
 - kiểm tra vé
 - anh muốn kiểm tra vé
@@ -13,6 +14,8 @@
 - tra cứu thông tin vé
 - anh muốn tra cứu thông tin
 - tra cứu thông tin
+- Em mở giúp anh mã vé
+- em kiểm tra giúp anh mã vé
 ## intent:affirm
 - đồng ý
 - ừ được
@@ -82,6 +85,7 @@
 - [Lê Minh](fullname)
 - [Lê Thị Thanh Huyền](fullname)
 ## intent:ans_changname
+- anh đặt nhầm. Tên đúng là [Đào Văn Khang](fullname). Em sửa giúp Anh/chị tên này nhé.
 - anh muốn đổi thành [Phan Anh Tuấn](fullname)
 - đổi thành [Cao Huy Văn](fullname)
 - đổi thành [cao huy văn](fullname)

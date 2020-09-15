@@ -5,21 +5,48 @@ intents:
 - greet
 - goodbye
 - affirm
-- deny
-- mood_great
-- mood_unhappy
-- bot_challenge
+= register
+- advice
+entities:
+slots:
+  request:
+    type: unfeaturized
+    auto_fill: false
 responses:
-  utter_greet:
-  - text: Hey! How are you?
-  utter_cheer_up:
-  - image: https://i.imgur.com/nGF1K8f.jpg
-    text: 'Here is something to cheer you up:'
+  utter_ask_request:
+  - buttons:
+    - payload: Đăng ký
+      title: Đăng ký
+    - payload: Tư vấn thêm
+      title: Tư vấn thêm
+    - payload: Khác
+      title: Khác
+    text: Em xin hỗ trợ A/C đăng ký tham gia PVI – Ngũ Phúc Ưu Việt. Em xin phép hỗ
+      trợ đăng ký ngay luôn nhé
+  utter_ask_advice:
+  - text: "3 đặc điểm nổi bật của bảo hiểm này như sau:\n
+            - Thứ nhất, mặc dù bảo hiểm này hỗ trợ chi phí điều trị nội trú và phẫu thuật, tuy nhiên giá thì chỉ khoảng 3,000VND ngày. Ngay cả khi anh/chị mua thêm gói ngoại trú và gói điều trị tiên 
+            tiến cho một số bệnh ung thư, thì giá cũng chỉ thấp hơn 7,000 đồng ngày, 
+            chỉ bằng giá nửa ổ bánh mỳ. Hơn nữa, mặc dù giá thấp nhưng anh/chị được 
+            bảo đảm bởi công ty bảo hiểm Dầu khí uy tín lâu năm.\n
+            - Thứ hai, cao cấp hơn bảo hiểm y tế nhà nuớc, bảo hiểm bên em không bị 
+            giới hạn về tuyến bệnh viện và sử dụng được ở bất kì bệnh viện nào trên toàn quốc.\n
+            - Thứ ba, thủ tục mua bảo hiểm rất đơn giản chỉ mất 5 phút để hoàn thành thủ tục qua điện thoại\n
+            Anh/Chị có muốn tham gia bảo hiểm ngay hôm nay luôn không ạ?"    
   utter_did_that_help:
   - text: Did that help you?
   utter_happy:
   - text: Great, carry on!
   utter_goodbye:
   - text: Bye
+  utter_default:
+  - text: không hiểu
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+actions:
+- action_chat_restart
+forms:
+- begin_form
+- advice_form
+- health_question_form
+
