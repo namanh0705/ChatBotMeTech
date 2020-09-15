@@ -49,7 +49,7 @@ class RequestForm(FormAction):
         """Define what the form has to do
             after all required slots are filled"""
         intent = tracker.get_slot("request")
-        if intent == 'register'
+        if intent == 'register':
             return [FollowupAction("register_form")]
         elif intent == 'advice':
             return [FollowupAction("advice_form")]
@@ -88,25 +88,25 @@ class AdviceForm(FormAction):
         """Define what the form has to do
             after all required slots are filled"""
         intent = tracker.get_slot("request")
-        if intent == 'affirm'
+        if intent == 'affirm':
             return [FollowupAction("health_question_form")]
         elif intent == 'deny':
             dispatcher.utter_message(text="dạ vâng, em cảm ơn chị!")
             return [FollowupAction("action_chat_restart")]
         else:
             return []
-class RequestForm(FormAction):
+class HealthyForm(FormAction):
     def name(self) -> Text:
         return "health_question_form"
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
-        return ["request"]
+        return ["healthy"]
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
 
         return {
-            "request": [self.from_text()],
+            "healthy": [self.from_text()],
         }
-    def validate_name(
+    def validate_healthy(
         self,
         value: Text,
         dispatcher: CollectingDispatcher,
@@ -115,10 +115,10 @@ class RequestForm(FormAction):
     ) -> Dict[Text, Any]:
         """Validate verifyinfor value."""
         intent = tracker.latest_message['intent'].get('name')
-        if intent == 'register' or intent == 'advice':
-            return {"request": intent}
+        if intent == 'affirm' or intent == 'deny':
+            return {"healthy": intent}
         else:
-            return {"request": None}
+            return {"healthy": None}
     def submit(
         self,
         dispatcher: CollectingDispatcher,
@@ -128,9 +128,9 @@ class RequestForm(FormAction):
         """Define what the form has to do
             after all required slots are filled"""
         intent = tracker.get_slot("request")
-        if intent == 'register'
+        if intent == 'affirm':
             return [FollowupAction("register_form")]
-        elif intent == 'advice':
+        elif intent == 'deny':
             return [FollowupAction("advice_form")]
         else:
             return []

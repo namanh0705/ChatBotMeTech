@@ -34,6 +34,7 @@
 - được em
 - được rồi
 - có em
+- ừ có
 ## intent:deny
 - không
 - không cần
