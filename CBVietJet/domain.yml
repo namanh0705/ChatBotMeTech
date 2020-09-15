@@ -59,6 +59,9 @@ slots:
     type: unfeaturized
     auto_fill: false
 responses:
+  utter_greet:
+  - text: Xin chào, Tổng Đài Vietjet danh số 1xxx xin nghe, em có thể hỗ trợ được
+      gì cho anh/chị ạ?
   utter_ask_name:
   - text: Anh vui lòng cho em biết tên mình để tiện việc xưng hô ạ!
   utter_ask_id_ticket:
@@ -95,6 +98,7 @@ responses:
   - text: Xin lỗi vui lòng cung cấp thông tin chính xác
 actions:
 - action_chat_restart
+- utter_greet
 forms:
 - resquest_form
 - id_ticket_form

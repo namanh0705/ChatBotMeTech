@@ -1,4 +1,6 @@
 ## happy path
+* greet
+    - utter_greet
 * request
     - resquest_form
     - form{"name":"resquest_form"}
@@ -54,6 +56,8 @@
     - slot{"confirm4":"deny"}
     - action_chat_restart
 ## unhappy path
+* greet
+    - utter_greet
 * request
     - resquest_form
     - form{"name":"resquest_form"}
