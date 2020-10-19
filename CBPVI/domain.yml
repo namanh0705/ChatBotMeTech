@@ -15,6 +15,27 @@ intents:
 - birthday
 - humanid
 - fullname
+- drive
+- busy
+- expensive
+- best_healthy
+- family_dont_agree
+- dont_hear
+- speak_fastly
+- ask
+- ans_cobaohiemroi
+- ans_BHYT
+- ans_thamkhaothem
+- ans_thamkhaothem_with_family
+- ans_goilaisau
+- ans_email
+- ans_khongtin
+- ans_sosanh
+- ans_khongdungBH
+- ans_thutucphuctap
+- ans_khongtintuongquadienthoai
+- ans_hopdong
+- ans_quatuoi
 entities:
 - fullname
 slots:

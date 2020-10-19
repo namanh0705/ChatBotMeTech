@@ -70,8 +70,221 @@ class IdAskForm(FormAction):
         elif confirm == 'deny':
             return [SlotSet("id", None),SlotSet("confirmid", None), FollowupAction("id_ask_form")]
         else:
+<<<<<<< HEAD
             pass
         return []
+=======
+            return []
+class Healthy1Form(FormAction):
+    def name(self) -> Text:
+        return "health1_question_form"
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["healthy1"]
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+
+        return {
+            "healthy1": [self.from_text()],
+        }
+    def validate_healthy1(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Validate verifyinfor value."""
+        intent = tracker.latest_message['intent'].get('name')
+        if intent == 'affirm' or intent == 'deny':
+            return {"healthy1": intent}
+        else:
+            return {"healthy1": None}
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        intent = tracker.get_slot("healthy1")
+        if intent == 'affirm':
+            return [FollowupAction("detail1_healthy_form")]
+        elif intent == 'deny':
+            return [FollowupAction("health2_question_form")]
+        else:
+            return []
+class Healthy2Form(FormAction):
+    def name(self) -> Text:
+        return "health2_question_form"
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["healthy2"]
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+
+        return {
+            "healthy2": [self.from_text()],
+        }
+    def validate_healthy2(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Validate verifyinfor value."""
+        intent = tracker.latest_message['intent'].get('name')
+        if intent == 'affirm' or intent == 'deny':
+            return {"healthy2": intent}
+        else:
+            return {"healthy2": None}
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        intent = tracker.get_slot("healthy2")
+        if intent == 'affirm':
+            return [FollowupAction("detail2_healthy_form")]
+        elif intent == 'deny':
+            return [FollowupAction("health3_question_form")]
+        else:
+            return []
+class Healthy3Form(FormAction):
+    def name(self) -> Text:
+        return "health3_question_form"
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["healthy3"]
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+
+        return {
+            "healthy3": [self.from_text()],
+        }
+    def validate_healthy3(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Validate verifyinfor value."""
+        intent = tracker.latest_message['intent'].get('name')
+        if intent == 'affirm' or intent == 'deny':
+            return {"healthy3": intent}
+        else:
+            return {"healthy3": None}
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        intent = tracker.get_slot("healthy3")
+        if intent == 'affirm':
+            return [FollowupAction("detail3_healthy_form")]
+        elif intent == 'deny':
+            return [FollowupAction("health4_question_form")]
+        else:
+            return []
+class Healthy4Form(FormAction):
+    def name(self) -> Text:
+        return "health4_question_form"
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["healthy4"]
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+
+        return {
+            "healthy4": [self.from_text()],
+        }
+    def validate_healthy(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Validate verifyinfor value."""
+        intent = tracker.latest_message['intent'].get('name')
+        if intent == 'affirm' or intent == 'deny':
+            return {"healthy4": intent}
+        else:
+            return {"healthy4": None}
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        return [FollowupAction("confirm_form")]
+class Detail1HealthyForm(FormAction):
+    def name(self) -> Text:
+        return "detail1_healthy_form"
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["detail1"]
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+
+        return {
+            "detail1": [self.from_text()],
+        }  
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        return [FollowupAction("health2_question_form")]
+class Detail2HealthyForm(FormAction):
+    def name(self) -> Text:
+        return "detail2_healthy_form"
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["detail2"]
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+
+        return {
+            "detail2": [self.from_text()],
+        }  
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        return [FollowupAction("health3_question_form")]
+class Detail3HealthyForm(FormAction):
+    def name(self) -> Text:
+        return "detail3_healthy_form"
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["detail3"]
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return {
+            "detail3": [self.from_text()],
+        }  
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
+        return [FollowupAction("health4_question_form")]
+>>>>>>> 655df688c1760c970cbbaca4253138ffcfe2a3b6
 class Confirm(FormAction):
     def name(self) -> Text:
         return "confirm_form"
