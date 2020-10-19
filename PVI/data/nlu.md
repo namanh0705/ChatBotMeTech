@@ -1,56 +1,62 @@
 ## intent:greet
-- hey
+- chào
 - hello
 - hi
-- good morning
-- good evening
-- hey there
-
-## intent:goodbye
-- bye
-- goodbye
-- see you around
-- see you later
+- ad ơi
+- tôi cần trợ giúp
+- bạn ơi
+- bạn gì ơi
+- xin chào
+## intent:fullname
+- anh tên là [Nguyễn Nam Anh](fullname)
+- tên [Cao Huy Văn](fullname)
+- [Phan Anh Tuấn](fullname)
+- [Lê Thị Bích Hạnh](fullname)
+- [Đào Anh Khang](fullname)
+## intent:humanid
+- 031900771
+- 12362445785
+- 15545115815
+- 78151484511
+## intent:birthday
+- ngày mùng 7 tháng 5 năm 1996
+- ngày 12 tháng 2 năm 2000
+- 02/04/1994
+## intent:choice
+- anh chọn đồng
+- bạc
+- vàng
+- kim cương
+- anh chọn kim cương
+## intent:drive
+- anh đang lái xe
+- đang lái xe nhé
+- đang trên đường nhé
+- đang tham gia giao thông nhé
+## intent:ans_other_city
+- anh sống ở Hải Phòng
+- Hải Dương em
+- Hồ Chí Minh em
+- Đà Lạt em
+- Bắc cạn em
 
 ## intent:affirm
-- yes
-- indeed
-- of course
-- that sounds good
-- correct
+- có
+- đồng ý
+- được
+- tất nhiên rồi
+- ok
+- ok em
+- chính xác
+- vâng ạ
+- vâng
+- đúng rồi
 
 ## intent:deny
-- no
-- never
-- I don't think so
-- don't like that
-- no way
-- not really
+- không
+- không bao giờ
+- không muốn
+- sai rồi
+- không chính xác
+- không nhé
 
-## intent:mood_great
-- perfect
-- very good
-- great
-- amazing
-- wonderful
-- I am feeling very good
-- I am great
-- I'm good
-
-## intent:mood_unhappy
-- sad
-- very sad
-- unhappy
-- bad
-- very bad
-- awful
-- terrible
-- not very good
-- extremely sad
-- so sad
-
-## intent:bot_challenge
-- are you a bot?
-- are you a human?
-- am I talking to a bot?
-- am I talking to a human?
