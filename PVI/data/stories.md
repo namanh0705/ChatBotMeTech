@@ -1,8 +1,22 @@
 ## happy path
 * greet
-  - begin_form
-  - form{"name":"begin_form"}
-  - slot{"requested_slot":"hello"}
+    - begin_form
+    - form{"name":"begin_form"}
 * affirm
- - begin_form
- - form{"name":null}
+    - begin_form
+    - form{"name":null}
+    - slot{"hello":"affirm"}
+    - please_form
+    - form{"name":"please_form"}
+* affirm
+    - please_form
+    - form{"name":null}
+    - slot{"please":"affirm"}
+    - step2_form
+    - form{"name":"step2_form"}
+* affirm
+    - step2_form
+    - form{"name":null}
+    - slot{"advice2":"affirm"}
+    - health1_question_form
+    - form{"name":"health1_question_form"}
