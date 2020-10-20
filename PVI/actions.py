@@ -3,7 +3,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
-from rasa_sdk.events import SlotSet,Form,ReminderScheduled,ActionReverted,UserUtteranceReverted,FollowupAction,AllSlotsReset
+from rasa_sdk.events import SlotSet,Form,ReminderScheduled,ActionReverted,UserUtteranceReverted,FollowupAction,AllSlotsReset, Restarted
 from rasa.core.slots import Slot
 from rasa.core.policies.memoization import MemoizationPolicy
 import datetime
@@ -11,6 +11,8 @@ import time
 from threading import Timer
 import re
 import random
+
+
 class ActionRestarted(Action):
     """ This is for restarting the chat"""
 
@@ -40,12 +42,43 @@ class Beginform(FormAction):
     ) -> Dict[Text, Any]:
         """Validate hello value."""
         intent = tracker.latest_message['intent'].get('name')
+        text = tracker.latest_message.get("text")
+        # if intent != '':
+        #     return {"hello": text}
         if intent == 'affirm':
             return {"hello": intent}
         elif intent == 'deny':
             return {"hello": intent}
         else:
             return {"hello": None}
+    # def validate(self, dispatcher, tracker, domain):
+    #     result = []
+    #     result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+    #                                     trigger_date_time=datetime.datetime.now()
+    #                                     + datetime.timedelta(seconds=30),
+    #                                     name="my_reminder",
+    #                                     kill_on_user_message=True))
+    #     slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+    #     # value = tracker.latest_message.get("text")
+    #     slot_to_fill = tracker.get_slot("requested_slot")
+    #     if slot_to_fill: 
+    #         slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+    #         value = tracker.latest_message["entities"] 
+    #         if not value:
+    #             print("''''")
+    #             text = tracker.latest_message.get("text")
+    #             result.append(SlotSet(slot_to_fill,text))
+    #     for slot, value in slot_values.items():
+    #         result.append(SlotSet(slot, value))
+    #     intent = tracker.latest_message.get("intent", {}).get("name")
+
+    #     if intent == "affirm":
+    #         result.append(SlotSet(slot_to_fill,None))
+    #     elif intent == "deny":
+    #         result.append(SlotSet(slot_to_fill,None))
+    #     else:
+    #         pass
+    #     return result
     def submit(
         self,
         dispatcher: CollectingDispatcher,
@@ -60,8 +93,8 @@ class Beginform(FormAction):
         elif intent == 'deny':
             return [FollowupAction("other_city")]
         else:
-            pass
-        return []
+            return []
+        
 
 class Pleaseform(FormAction):
     def name(self) -> Text:
@@ -130,9 +163,9 @@ class Other_city(FormAction):
         """Validate othercity value."""
         intent = tracker.latest_message['intent'].get('name')
         if intent == 'ans_other_city':
-            return {"ans_other_city": intent}
+            return {"othercity": intent}
         else:
-            return {"hello": None}
+            return {"othercity": None}
     def validate_othercityask(
         self,
         value: Text,
@@ -515,4 +548,327 @@ class InforForm(FormAction):
             after all required slots are filled"""
         dispatcher.utter_message(text="Cảm ơn anh/chị")
         return []
+   
+class ActionDangerForm(FormAction):
+    def name(self):
+        return "drive_form"
+    @staticmethod
+    def required_slots(tracker)-> List[Text]:
+        return["drive"]
+    def slot_mappings(self):
+        return {
+            "drive": [
+                self.from_intent(intent='affirm',value= True),
+                self.from_intent(intent='deny',value= False)
+            ]
+        }
+    def validate(self, dispatcher, tracker, domain):
+        result = []
+        # result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+        #                                 trigger_date_time=datetime.datetime.now()
+        #                                 + datetime.timedelta(seconds=30),
+        #                                 name="first_remind",
+        #                                 kill_on_user_message=True))
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+        value = tracker.latest_message.get("text")
+        slot_to_fill = tracker.get_slot("requested_slot")
+        if slot_to_fill: 
+            slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+        for slot, value in slot_values.items():
+            result.append(SlotSet(slot, value))
+        if slot_to_fill !="drive":
+            print("'''")
+            return [SlotSet(slot_to_fill,None)]
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "chitchat":
+            result.append(SlotSet(slot_to_fill,None))
+        return result
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+        )  ->List[Dict]:
+        if tracker.get_slot("drive") == False:
+            dispatcher.utter_message(text="Cảm ơn thời gian của anh/chị")
+            return [FollowupAction("action_chat_restart")]
+        else:
+            return [SlotSet('drive',True),FollowupAction("step2_form")]
 
+
+class DontNeedForm(FormAction):
+    def name(self):
+        return "dont_need_form"
+    @staticmethod
+    def required_slots(tracker)-> List[Text]:
+        return["dont_need"]
+    def slot_mappings(self):
+        return {
+            "dont_need": [
+                self.from_intent(intent='affirm',value= True),
+                self.from_intent(intent='deny',value= False)
+            ]
+        }
+    def validate(self, dispatcher, tracker, domain):
+        result = []
+        # result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+        #                                 trigger_date_time=datetime.datetime.now()
+        #                                 + datetime.timedelta(seconds=30),
+        #                                 name="first_remind",
+        #                                 kill_on_user_message=True))
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+        value = tracker.latest_message.get("text")
+        slot_to_fill = tracker.get_slot("requested_slot")
+        if slot_to_fill: 
+            slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+        for slot, value in slot_values.items():
+            result.append(SlotSet(slot, value))
+        if slot_to_fill !="dont_need":
+            print("'''")
+            return [SlotSet(slot_to_fill,None)]
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "chitchat":
+            result.append(SlotSet(slot_to_fill,None))
+        return result
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+        )  ->List[Dict]:
+        if tracker.get_slot("dont_need") == False:
+            ddispatcher.utter_message(text="Cảm ơn thời gian của anh/chị")
+            return [FollowupAction("action_chat_restart")]
+        else:
+            return [SlotSet('dont_need',True),FollowupAction("step2_form")]
+
+
+class FamilyForm(FormAction):
+    def name(self):
+        return "askfamily_form"
+    @staticmethod
+    def required_slots(tracker)-> List[Text]:
+        return["family"]
+    def slot_mappings(self):
+        return {
+            "family": [
+                self.from_intent(intent='affirm',value= True),
+                self.from_intent(intent='deny',value= False)
+            ]
+        }
+    def validate(self, dispatcher, tracker, domain):
+        result = []
+        # result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+        #                                 trigger_date_time=datetime.datetime.now()
+        #                                 + datetime.timedelta(seconds=30),
+        #                                 name="first_remind",
+        #                                 kill_on_user_message=True))
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+        value = tracker.latest_message.get("text")
+        slot_to_fill = tracker.get_slot("requested_slot")
+        if slot_to_fill: 
+            slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+        for slot, value in slot_values.items():
+            result.append(SlotSet(slot, value))
+        if slot_to_fill !="family":
+            print("'''")
+            return [SlotSet(slot_to_fill,None)]
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "chitchat":
+            result.append(SlotSet(slot_to_fill,None))
+        return result
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+        )  ->List[Dict]:
+        if tracker.get_slot("family") == False:
+            dispatcher.utter_message(text="Cảm ơn thời gian của anh/chị")
+            return [FollowupAction("action_chat_restart")]
+        else:
+            return [SlotSet('family',True),FollowupAction("step2_form")]
+
+class BusyForm(FormAction):
+    def name(self):
+        return "busy_form"
+    @staticmethod
+    def required_slots(tracker)-> List[Text]:
+        return["busy"]
+    def slot_mappings(self):
+        return {
+            "busy": [
+                self.from_intent(intent='affirm',value= True),
+                self.from_intent(intent='deny',value= False)
+            ]
+        }
+    def validate(self, dispatcher, tracker, domain):
+        result = []
+        # result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+        #                                 trigger_date_time=datetime.datetime.now()
+        #                                 + datetime.timedelta(seconds=30),
+        #                                 name="first_remind",
+        #                                 kill_on_user_message=True))
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+        value = tracker.latest_message.get("text")
+        slot_to_fill = tracker.get_slot("requested_slot")
+        if slot_to_fill: 
+            slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+        for slot, value in slot_values.items():
+            result.append(SlotSet(slot, value))
+        if slot_to_fill !="busy":
+            print("'''")
+            return [SlotSet(slot_to_fill,None)]
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "chitchat":
+            result.append(SlotSet(slot_to_fill,None))
+        return result
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+        )  ->List[Dict]:
+        if tracker.get_slot("busy") == False:
+            dispatcher.utter_message(text="Cảm ơn thời gian của anh/chị")
+            return [FollowupAction("action_chat_restart")]
+        else:
+            return [SlotSet('busy',True),FollowupAction("step2_form")]
+
+class CallBackForm(FormAction):
+    def name(self):
+        return "callback_form"
+    @staticmethod
+    def required_slots(tracker)-> List[Text]:
+        return["callback"]
+    def slot_mappings(self):
+        return {
+            "callback": [
+                self.from_intent(intent='affirm',value= True),
+                self.from_intent(intent='deny',value= False)
+            ]
+        }
+    def validate(self, dispatcher, tracker, domain):
+        result = []
+        # result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+        #                                 trigger_date_time=datetime.datetime.now()
+        #                                 + datetime.timedelta(seconds=30),
+        #                                 name="first_remind",
+        #                                 kill_on_user_message=True))
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+        value = tracker.latest_message.get("text")
+        slot_to_fill = tracker.get_slot("requested_slot")
+        if slot_to_fill: 
+            slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+        for slot, value in slot_values.items():
+            result.append(SlotSet(slot, value))
+        if slot_to_fill !="callback":
+            print("'''")
+            return [SlotSet(slot_to_fill,None)]
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "chitchat":
+            result.append(SlotSet(slot_to_fill,None))
+        return result
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+        )  ->List[Dict]:
+        if tracker.get_slot("callback") == False:
+            dispatcher.utter_message(text="Cảm ơn thời gian của anh/chị")
+            return [FollowupAction("action_chat_restart")]
+        else:
+            return [SlotSet('callback',True),FollowupAction("step2_form")]
+
+class EmailForm(FormAction):
+    def name(self):
+        return "email_form"
+    @staticmethod
+    def required_slots(tracker)-> List[Text]:
+        return["email"]
+    def slot_mappings(self):
+        return {
+            "email": [
+                self.from_intent(intent='affirm',value= True),
+                self.from_intent(intent='deny',value= False)
+            ]
+        }
+    def validate(self, dispatcher, tracker, domain):
+        result = []
+        # result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+        #                                 trigger_date_time=datetime.datetime.now()
+        #                                 + datetime.timedelta(seconds=30),
+        #                                 name="first_remind",
+        #                                 kill_on_user_message=True))
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+        value = tracker.latest_message.get("text")
+        slot_to_fill = tracker.get_slot("requested_slot")
+        if slot_to_fill: 
+            slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+        for slot, value in slot_values.items():
+            result.append(SlotSet(slot, value))
+        if slot_to_fill !="email":
+            print("'''")
+            return [SlotSet(slot_to_fill,None)]
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "chitchat":
+            result.append(SlotSet(slot_to_fill,None))
+        return result
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+        )  ->List[Dict]:
+        if tracker.get_slot("email") == False:
+            dispatcher.utter_message(text="Cảm ơn thời gian của anh/chị")
+            return [FollowupAction("action_chat_restart")]
+        else:
+            return [SlotSet('email',True),FollowupAction("step2_form")]
+
+class HaveBHXHForm(FormAction):
+    def name(self):
+        return "havebhxh_form"
+    @staticmethod
+    def required_slots(tracker)-> List[Text]:
+        return["havebhyt"]
+    def slot_mappings(self):
+        return {
+            "havebhyt": [
+                self.from_intent(intent='affirm',value= True),
+                self.from_intent(intent='deny',value= False)
+            ]
+        }
+    def validate(self, dispatcher, tracker, domain):
+        result = []
+        # result.append(ReminderScheduled(intent_name="EXTERNAL_reminder",
+        #                                 trigger_date_time=datetime.datetime.now()
+        #                                 + datetime.timedelta(seconds=30),
+        #                                 name="first_remind",
+        #                                 kill_on_user_message=True))
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+        value = tracker.latest_message.get("text")
+        slot_to_fill = tracker.get_slot("requested_slot")
+        if slot_to_fill: 
+            slot_values.update(self.extract_requested_slot(dispatcher,tracker,domain))
+        for slot, value in slot_values.items():
+            result.append(SlotSet(slot, value))
+        if slot_to_fill !="havebhyt":
+            print("'''")
+            return [SlotSet(slot_to_fill,None)]
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "chitchat":
+            result.append(SlotSet(slot_to_fill,None))
+        return result
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+        )  ->List[Dict]:
+        if tracker.get_slot("havebhyt") == False:
+            dispatcher.utter_message(text="Cảm ơn thời gian của anh/chị")
+            return [FollowupAction("action_chat_restart")]
+        else:
+            return [SlotSet('havebhyt',True),FollowupAction("step2_form")]

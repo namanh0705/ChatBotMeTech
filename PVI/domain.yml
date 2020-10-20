@@ -9,9 +9,21 @@ intents:
 - humanid
 - birthday
 - choice
-- drive:
-    triggers: action_danger_form
 - ans_other_city
+- drive:
+    triggers: drive_form
+- dontneed:
+    triggers: dont_need_form
+- busy:
+    triggers: busy_form
+- callback:
+    triggers: callback_form
+- email:
+    triggers: email_form
+- haveBHXH:
+    triggers: havebhxh_form
+- askfamily:
+    triggers: askfamily_form
 entities:
 - fullname
 slots:
@@ -22,6 +34,12 @@ slots:
     type: unfeaturized
     auto_fill: false
   birthday:
+    type: unfeaturized
+    auto_fill: false
+  busy:
+    type: unfeaturized
+    auto_fill: false
+  callback:
     type: unfeaturized
     auto_fill: false
   confirm:
@@ -36,7 +54,22 @@ slots:
   detail3:
     type: unfeaturized
     auto_fill: false
+  dont_need:
+    type: unfeaturized
+    auto_fill: false
+  drive:
+    type: unfeaturized
+    auto_fill: false
+  email:
+    type: unfeaturized
+    auto_fill: false
+  family:
+    type: unfeaturized
+    auto_fill: false
   fullname:
+    type: unfeaturized
+    auto_fill: false
+  havebhyt:
     type: unfeaturized
     auto_fill: false
   healthy1:
@@ -69,6 +102,33 @@ slots:
   requested_slot:
     type: unfeaturized
 responses:
+  utter_ask_family:
+  - text: Phí sản phầm này rất thấp, nó cũng phù hợp cho gia đình của mình luôn, Anh/ chị có muốn tiếp tục đăng kí không ạ?
+  utter_ask_email:
+  - text: Còn điểm nào A/C chưa rõ ạ?／Điểm nào mình thấy phù hợp ạ?
+  utter_ask_busy:
+  - text: 'Chỉ riêng ngày hôm nay em mang đến cho A/C một lời đề nghị đặc biệt từ
+      PVI, chỉ xin A/C 2 phút được không ạ? '
+  utter_ask_havebhyt:
+  - text: 'Chúc mừng A/C đã có gói bảo hiểm cho mình. Cao cấp hơn bảo hiểm y tế nhà
+      nuớc, bảo hiểm bên em không bị giới hạn về tuyến bệnh viện, sử dụng được ở bất
+      kì bệnh viện nào trên toàn quốc và quy trình rất nhanh và dễ dàng. Nên có rất
+      nhiều người mua thêm sản phẩm này bên cạnh gói BHYTNN để gia tăng quyền lợi.
+      Bên cạnh đó, mặc dù bảo hiểm này hỗ trợ chi phí điều trị nội trú và phẫu thuật, 
+      tuy nhiên giá thì chỉ khoảng 3,000VND ngày. Ngay cả khi anh/chị mua thêm gói ngoại 
+      trú và gói điều trị tiên tiến cho một số bệnh ung thư, thì giá cũng chỉ thấp hơn 7,000 đồng ngày, 
+      chỉ bằng giá nửa ổ bánh mỳ. Hơn nữa, mặc dù giá thấp nhưng anh/chị được bảo đảm bởi công ty bảo hiểm Dầu khí uy tín lâu năm. Anh/chị có muốn đăng kí không ạ?'
+  utter_ask_dont_need:
+  - text: Dạ vâng em hiểu ạ, chỉ ngày hôm nay A/C là KH may mắn được bên em lựa chọn
+      để mang đến lời đề nghị đặc biệt từ PVI, công ty bảo hiểm uy tín số một trên
+      thị trường.
+  utter_ask_callback:
+  - text: Dạ vâng, hôm nay A/C là KH may mắn được bên em lựa chọn để mang đến lời
+      đề nghị đặc biệt từ PVI, công ty bảo hiểm uy tín số một trên thị trường
+  utter_ask_drive:
+  - text: Dạ em gọi từ Hoa Sao có liên kết với PVI thuộc Dầu Khí Việt Nam, chỉ riêng
+      ngày hôm nay em mang đến cho A/C một lời đề nghị đặc biệt từ PVI, chỉ xin A/C
+      2 phút thôi được không ạ?
   utter_ask_hello:
   - text: Chào anh/chị, cảm ơn anh/chị đã liên lạc đến công ty Hoa Sao liên kết với
       công ty PVI thuộc Dầu Khí Việt Nam. bên em có một lời đề nghị đặc biệt từ Công
@@ -170,7 +230,6 @@ responses:
   - text: Xin lỗi em chưa hiểu, xin anh/chị vui lòng nói lại ạ!
 actions:
 - action_chat_restart
-- action_danger_form
 forms:
 - begin_form
 - please_form
@@ -185,3 +244,10 @@ forms:
 - detail3_healthy_form
 - confirm_form
 - infor_form
+- drive_form
+- dont_need_form
+- busy_form
+- callback_form
+- email_form
+- havebhxh_form
+- askfamily_form

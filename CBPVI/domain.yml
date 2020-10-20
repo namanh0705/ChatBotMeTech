@@ -116,7 +116,7 @@ responses:
   utter_ask_healthy1:
   - buttons:
     - payload: Có
-      title: Có
+      title: Cóh
     - payload: Không
       title: Không
     text: "Em thấy Anh/Chị cũng quan tâm đến bảo hiểm này. Trước khi giới thiệu chi\
