@@ -1,22 +1,31 @@
 ## happy path
 * greet
-    - begin_form
-    - form{"name":"begin_form"}
+  - utter_greet
+* mood_great
+  - utter_happy
+
+## sad path 1
+* greet
+  - utter_greet
+* mood_unhappy
+  - utter_cheer_up
+  - utter_did_that_help
 * affirm
-    - begin_form
-    - form{"name":null}
-    - slot{"hello":"affirm"}
-    - please_form
-    - form{"name":"please_form"}
-* affirm
-    - please_form
-    - form{"name":null}
-    - slot{"please":"affirm"}
-    - step2_form
-    - form{"name":"step2_form"}
-* affirm
-    - step2_form
-    - form{"name":null}
-    - slot{"advice2":"affirm"}
-    - health1_question_form
-    - form{"name":"health1_question_form"}
+  - utter_happy
+
+## sad path 2
+* greet
+  - utter_greet
+* mood_unhappy
+  - utter_cheer_up
+  - utter_did_that_help
+* deny
+  - utter_goodbye
+
+## say goodbye
+* goodbye
+  - utter_goodbye
+
+## bot challenge
+* bot_challenge
+  - utter_iamabot

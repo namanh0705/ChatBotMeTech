@@ -1,253 +1,32 @@
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-intents:
-- greet
-- affirm
-- deny
-- fullname
-- humanid
-- birthday
-- choice
-- ans_other_city
-- drive:
-    triggers: drive_form
-- dontneed:
-    triggers: dont_need_form
-- busy:
-    triggers: busy_form
-- callback:
-    triggers: callback_form
-- email:
-    triggers: email_form
-- haveBHXH:
-    triggers: havebhxh_form
-- askfamily:
-    triggers: askfamily_form
-entities:
-- fullname
-slots:
-  advice:
-    type: unfeaturized
-    auto_fill: false
-  advice2:
-    type: unfeaturized
-    auto_fill: false
-  birthday:
-    type: unfeaturized
-    auto_fill: false
-  busy:
-    type: unfeaturized
-    auto_fill: false
-  callback:
-    type: unfeaturized
-    auto_fill: false
-  confirm:
-    type: unfeaturized
-    auto_fill: false
-  detail1:
-    type: unfeaturized
-    auto_fill: false
-  detail2:
-    type: unfeaturized
-    auto_fill: false
-  detail3:
-    type: unfeaturized
-    auto_fill: false
-  dont_need:
-    type: unfeaturized
-    auto_fill: false
-  drive:
-    type: unfeaturized
-    auto_fill: false
-  email:
-    type: unfeaturized
-    auto_fill: false
-  family:
-    type: unfeaturized
-    auto_fill: false
-  fullname:
-    type: unfeaturized
-    auto_fill: false
-  havebhyt:
-    type: unfeaturized
-    auto_fill: false
-  healthy1:
-    type: unfeaturized
-    auto_fill: false
-  healthy2:
-    type: unfeaturized
-    auto_fill: false
-  healthy3:
-    type: unfeaturized
-    auto_fill: false
-  healthy4:
-    type: unfeaturized
-    auto_fill: false
-  hello:
-    type: unfeaturized
-    auto_fill: false
-  humanid:
-    type: unfeaturized
-    auto_fill: false
-  othercity:
-    type: unfeaturized
-    auto_fill: false
-  othercityask:
-    type: unfeaturized
-    auto_fill: false
-  please:
-    type: unfeaturized
-    auto_fill: false
-  requested_slot:
-    type: unfeaturized
-responses:
-  utter_ask_family:
-  - text: Phí sản phầm này rất thấp, nó cũng phù hợp cho gia đình của mình luôn, Anh/ chị có muốn tiếp tục đăng kí không ạ?
-  utter_ask_email:
-  - text: Còn điểm nào A/C chưa rõ ạ?／Điểm nào mình thấy phù hợp ạ?
-  utter_ask_busy:
-  - text: 'Chỉ riêng ngày hôm nay em mang đến cho A/C một lời đề nghị đặc biệt từ
-      PVI, chỉ xin A/C 2 phút được không ạ? '
-  utter_ask_havebhyt:
-  - text: 'Chúc mừng A/C đã có gói bảo hiểm cho mình. Cao cấp hơn bảo hiểm y tế nhà
-      nuớc, bảo hiểm bên em không bị giới hạn về tuyến bệnh viện, sử dụng được ở bất
-      kì bệnh viện nào trên toàn quốc và quy trình rất nhanh và dễ dàng. Nên có rất
-      nhiều người mua thêm sản phẩm này bên cạnh gói BHYTNN để gia tăng quyền lợi.
-      Bên cạnh đó, mặc dù bảo hiểm này hỗ trợ chi phí điều trị nội trú và phẫu thuật, 
-      tuy nhiên giá thì chỉ khoảng 3,000VND ngày. Ngay cả khi anh/chị mua thêm gói ngoại 
-      trú và gói điều trị tiên tiến cho một số bệnh ung thư, thì giá cũng chỉ thấp hơn 7,000 đồng ngày, 
-      chỉ bằng giá nửa ổ bánh mỳ. Hơn nữa, mặc dù giá thấp nhưng anh/chị được bảo đảm bởi công ty bảo hiểm Dầu khí uy tín lâu năm. Anh/chị có muốn đăng kí không ạ?'
-  utter_ask_dont_need:
-  - text: Dạ vâng em hiểu ạ, chỉ ngày hôm nay A/C là KH may mắn được bên em lựa chọn
-      để mang đến lời đề nghị đặc biệt từ PVI, công ty bảo hiểm uy tín số một trên
-      thị trường.
-  utter_ask_callback:
-  - text: Dạ vâng, hôm nay A/C là KH may mắn được bên em lựa chọn để mang đến lời
-      đề nghị đặc biệt từ PVI, công ty bảo hiểm uy tín số một trên thị trường
-  utter_ask_drive:
-  - text: Dạ em gọi từ Hoa Sao có liên kết với PVI thuộc Dầu Khí Việt Nam, chỉ riêng
-      ngày hôm nay em mang đến cho A/C một lời đề nghị đặc biệt từ PVI, chỉ xin A/C
-      2 phút thôi được không ạ?
-  utter_ask_hello:
-  - text: Chào anh/chị, cảm ơn anh/chị đã liên lạc đến công ty Hoa Sao liên kết với
-      công ty PVI thuộc Dầu Khí Việt Nam. bên em có một lời đề nghị đặc biệt từ Công
-      ty PVI thuộc Dầu khí Việt Nam, chỉ dành riêng cho anh/chị,   sống tại thành
-      phố Hà Nội.Cho em hỏi hiện nay anh chị có sống tại thành phố Hà Nội không ạ?
-  utter_ask_othercity:
-  - text: Nhân tiện cho em hỏi là mình đang sống ở đâu vậy ạ?
-  utter_ask_othercityask:
-  - text: Dạ vâng, em cảm ơn anh/chị, anh/chị có muốn em giải thích ngắn ngọn như
-      sau được không ạ?
-  utter_ask_advice2:
-  - text: "3 đặc điểm nổi bật của bảo hiểm này như sau:\n - Thứ nhất, mặc dù bảo hiểm\
-      \ này hỗ trợ chi phí điều trị nội trú và phẫu thuật, tuy nhiên giá thì chỉ khoảng\
-      \ 3,000VND ngày. Ngay cả khi anh/chị mua thêm gói ngoại trú và gói điều trị\
-      \ tiên tiến cho một số bệnh ung thư, thì giá cũng chỉ thấp hơn 7,000 đồng ngày,\
-      \ chỉ bằng giá nửa ổ bánh mỳ. Hơn nữa, mặc dù giá thấp nhưng anh/chị được bảo\
-      \ đảm bởi công ty bảo hiểm Dầu khí uy tín lâu năm.\n - Thứ hai, cao cấp hơn\
-      \ bảo hiểm y tế nhà nuớc, bảo hiểm bên em không bị giới hạn về tuyến bệnh viện\
-      \ và sử dụng được ở bất kì bệnh viện nào trên toàn quốc.\n - Thứ ba, thủ tục\
-      \ mua bảo hiểm rất đơn giản chỉ mất 5 phút để hoàn thành thủ tục qua điện thoại\n\
-      \ Anh/Chị có muốn tham gia bảo hiểm ngay hôm nay luôn không ạ?"
-  utter_ask_healthy1:
-  - buttons:
-    - payload: Có
-      title: Có
-    - payload: Không
-      title: Không
-    text: "Em thấy Anh/Chị cũng quan tâm đến bảo hiểm này. Trước khi giới thiệu chi\
-      \ tiết về các gói bảo hiểm, Anh/Chị cho phép em hỏi 4 câu hỏi liên quan đến\
-      \ tình trạng sức khoẻ của Anh/Chị ạ. Thông tin này sẽ giúp em tạm thời đo lường\
-      \ xem Anh/Chị có phù hợp với sản phẩm này hay không ạ.\n Anh/chị đã được bác\
-      \ sĩ tư vấn tiến hành điều trị bệnh nào đó hoặc đã được điều trị, hoặc nhập\
-      \ viện hoặc trải qua một cuộc giải phẫu tại bệnh viện, điều trị tại nhà, phòng\
-      \ khám hoặc các cơ sở y tế khác trong suốt 3 năm qua không?"
-  utter_ask_healthy2:
-  - buttons:
-    - payload: Có
-      title: Có
-    - payload: Không
-      title: Không
-    text: Anh/Chị hiện đang được theo dõi hoặc điều trị cho bất kỳ thương tật, bệnh
-      tật, các triệu chứng bất thường. Hoặc dự định sẽ được điều trị trong vòng 12
-      tháng tới không ạ?
-  utter_ask_healthy3:
-  - buttons:
-    - payload: Có
-      title: Có
-    - payload: Không
-      title: Không
-    text: Anh/Chị đã từng mắc phải, hoặc được thông báo rằng Anh/Chị mắc phải hoặc
-      đang trong quá trình kiểm tra bệnh viêm gan siêu vi B/C, ung thư, khối u, u
-      nang, phát triển ung thư biểu mô tại chỗ của bất kỳ loại ung thư nào không?
-  utter_ask_healthy4:
-  - buttons:
-    - payload: Có
-      title: Có
-    - payload: Không
-      title: Không
-    text: Anh/Chị đã từng bị khước từ nhận bảo hiểm sức khỏe hoặc được chấp nhận nhưng
-      với điều kiện áp dụng các điều khoản bổ sung đặc biệt khác trong vòng 5 năm
-      gần đây không?
-  utter_ask_please:
-  - text: Chúc mừng anh/chị.Em xin giải thích ngắn gọn với anh/chị. Em xin mình ít
-      phút được không ạ?
-  utter_ask_detail1:
-  - text: Triệu chứng của bệnh là gì ạ?
-  utter_ask_detail2:
-  - text: Nếu phải nằm viện, Anh/Chị phải điều trị trong bao lâu?
-  utter_ask_detail3:
-  - text: Anh/Chị có từng phẫu thuật không?
-  utter_ask_confirm:
-  - buttons:
-    - payload: Đồng
-      title: Đồng
-    - payload: Bạc
-      title: Bạc
-    - payload: Vàng
-      title: Vàng
-    - payload: Kim cương
-      title: Kim cương
-    text: "Em nhận thấy anh/chị đang rất quan tâm về sản phẩm này, nhân viên bên em\
-      \ sẽ đến tận nơi của anh/chị để hỗ trợ hoàn tất bảng câu hỏi sức khỏe. Anh/Chị\
-      \ vui lòng điền đầy đủ thôn tin và kí tên xác nhận.\n Nhưng trước tiên, em xin\
-      \ phép giới thiệu chi tiết sản phẩm \n Và đây là các đặc điểm nổi trội của gói\
-      \ bảo hiểm chính:\n 1. Viện phí trong thời gian điều trị nội trú: (Tối đa 60\
-      \ ngày/năm) 1,250,000 VND/ngày, tối đa 62,500,000 VND/năm \n - Tiền giường điều\
-      \ trị \n - Xét nghiệm, chẩn đoán hình ảnh \n - Thuốc điều trị \n - Các chi phí\
-      \ y tế khác \n 2. Chi phí phẫu thuật (không bao gồm chi phí khám tiền phẫu thuật)\
-      \ : tối đa 62,500,000 VND/năm \n 3. Chi phí y tế cho phương pháp điều trị ung\
-      \ thư tiên tiến  (giới hạn cho từng bệnh) lên đến 125,000,000 VND/năm.\n Anh/chị\
-      \ chọn gói nào ạ?"
-  utter_ask_fullname:
-  - text: Anh/chị cho biết họ và tên?
-  utter_ask_humanid:
-  - text: Anh/chị cho biết số chứng minh nhân dân
-  utter_ask_birthday:
-  - text: Anh/chị cho biết ngày tháng năm sinh
-  utter_default:
-  - text: Xin lỗi em chưa hiểu, xin anh/chị vui lòng nói lại ạ!
-actions:
-- action_chat_restart
-forms:
-- begin_form
-- please_form
-- other_city
-- step2_form
-- health1_question_form
-- health2_question_form
-- health3_question_form
-- health4_question_form
-- detail1_healthy_form
-- detail2_healthy_form
-- detail3_healthy_form
-- confirm_form
-- infor_form
-- drive_form
-- dont_need_form
-- busy_form
-- callback_form
-- email_form
-- havebhxh_form
-- askfamily_form
